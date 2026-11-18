@@ -37,4 +37,20 @@ st.write("Welcome to your AI Interview Assistant.")
 role =st.selectbox("Job Title", ["Machine Learning Engineer", "Senior Software Engineering","Full Stack Engineer","Backend Engineer","Others"])
 
 if role =="Others":
-    st.text_input("Enter your Job Title",XXXXXX)
+    st.text_input("Enter your Job Title","XXXXXX")
+
+model = st.selectbox(
+    "Choose Your Model",
+    [
+        "openai/gpt-oss-120b" ,
+        "openai/gpt-oss-20b"
+    ]
+)
+level = st.selectbox(
+    "Choose The Level",
+    [
+        "Beginner", "Intermediate", "Advanced"
+    ]
+)
+
+mode = st.radio("Activity",["General Question", "Generate Code Questions", "Evaluate Answers", "Improve Answer"])
