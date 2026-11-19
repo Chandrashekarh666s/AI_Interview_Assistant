@@ -75,7 +75,8 @@ if st.button("Generate AI Response", type = "primary"):
         except Exception as e:
             st.error(f"API connection was unsuccessful: {e}")
             st.info("Please check your API key and rate limits.")
-   st.caption("Powered by Streamlit and GitHub, Using  LLM API")
+    st.caption("Powered by Streamlit and GitHub, Using  LLM API")
+   
 
           
                
