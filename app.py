@@ -80,7 +80,7 @@ if st.button("Generate AI Response", type = "primary"):
         task = "Question:" + question + "Answer: " + answer + "Improve the answer based on the result and highligth the important points."
     backround = "Job Role :" +role + "Difficulty level" +level 
     with st.spinner("Generating your answer..."):
-    try:
+         try:
         req = client.chat.completions.create(
             model=model,
             messages=[
@@ -106,6 +106,7 @@ if st.button("Generate AI Response", type = "primary"):
     except Exception as e:
         st.error(f"API connection was unsuccessful: {e}")
         st.info("Please check your API key and rate limits.")
+   
    
     
     
