@@ -81,7 +81,7 @@ if st.button("Generate AI Response", type = "primary"):
     backround = "Job Role :" +role + "Difficulty level" +level 
     with st.spinner("Generating Your answer....."):
         try:
-        req = client.chat.completions.create(
+             req = client.chat.completions.create(
         model=gen_model,
         messages=[
             {"role": "system", "content": "Act as an expert Technical Interviewer."},
