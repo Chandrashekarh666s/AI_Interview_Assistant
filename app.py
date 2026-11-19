@@ -1,17 +1,15 @@
 
 import streamlit as st
 
-# Page configuration
 st.set_page_config(
     page_title="LLM",
     layout="centered"
 )
 
-# Application title
 st.title("AI Interview")
 st.caption("Practice and Prepare for your placement")
 st.caption("Chandrashekar H")
-# Import Groq safely
+
 try:
     from groq import Groq
 
@@ -20,7 +18,6 @@ except ImportError:
     st.info("Add groq to your requirements.txt file and redeploy.")
     st.stop()
 
-# API configuration
 try:
     client = Groq(
         api_key=st.secrets["GROQ_API_KEY"]
@@ -29,8 +26,6 @@ try:
 except (KeyError, FileNotFoundError):
     st.error("API key is missing. Add it in Streamlit Secrets.")
     st.stop()
-
-# Success message
 st.success("Groq API connected successfully!")
 
 st.write("Welcome to your AI Interview Assistant.")
@@ -57,8 +52,7 @@ mode = st.radio("Activity",["Generate Question", "Generate Code Questions", "Eva
 if mode =="Generate Question" :
     count = st.slider("Number Of Questions",1,10,5)
 elif mode =="Generate code Questions" :
-    topic = st.selectbox( "Select Topic",
-                         [ "Python", "C++", "C", "DSA", "Aptitude","Java"])
+    topic = st.selectbox( "Select Topic", [ "Python", "C++", "C", "DSA", "Aptitude","Java"])
     count= st.slider("Number of Questions",1,10,5)
 else:
     question = st.text_area("Enter Interview Question Here")
@@ -85,8 +79,7 @@ if st.button("Generate AI Response", type = "primary"):
                     model=model,
                      messages=[
                           {"role": "system", "content": "Act as an expert Technical Interviewer."},
-                           {"role": "user", "content": background + task}
-            ],
+                           {"role": "user", "content": background + task}],
             temperature=0.7,
             max_tokens=1800
         )
@@ -96,12 +89,7 @@ if st.button("Generate AI Response", type = "primary"):
         st.subheader("AI Response")
         st.markdown(output)
 
-        st.download_button(
-            "Download Response",
-            output,
-            file_name="Interview_Response.txt",
-            mime="text/plain"
-        )
+        st.download_button("Download Response", output,file_name="Interview_Response.txt", mime="text/plain")
 
     except Exception as e:
         st.error(f"API connection was unsuccessful: {e}")
