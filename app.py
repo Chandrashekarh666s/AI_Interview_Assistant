@@ -34,19 +34,9 @@ role =st.selectbox("Job Title", ["Machine Learning Engineer", "Senior Software E
 if role =="Others":
     st.text_input("Enter your Job Title","XXXXXX")
 
-model = st.selectbox(
-    "Choose Your Model",
-    [
-        "openai/gpt-oss-120b" ,
-        "openai/gpt-oss-20b"
-    ]
-)
-level = st.selectbox(
-    "Choose The Level",
-    [
-        "Beginner", "Intermediate", "Advanced"
-    ]
-)
+gen_model = st.selectbox("Choose Your Model", ["openai/gpt-oss-120b" ,"openai/gpt-oss-20b" ])
+
+level = st.selectbox( "Choose The Level",["Beginner", "Intermediate", "Advanced"] )
 
 mode = st.radio("Activity",["Generate Question", "Generate Code Questions", "Evaluate Answers", "Improve Answer"])
 if mode =="Generate Question" :
@@ -57,13 +47,10 @@ elif mode =="Generate code Questions" :
 else:
     question = st.text_area("Enter Interview Question Here")
     answer = st.text_area("Enter Your Answer", height=160)
-
 if st.button("Generate AI Response", type = "primary"):
     if mode ==["Evaluate Answer", "Improve Answer"] and (not question.strip()) or (not answer.strip()):
         st.warning ("please enter a valid Question and Answer")
         st.stop()
-        
-    topics = "Topic is" + topic +"Difficulty is" +level
     if mode == "Generate Question" :
         task = "Generate" + str(count) +"Frequently asked Interview question 3 situation based questions as well as 2 theory questions"
     elif mode == "Generate Code Questions":
@@ -74,32 +61,21 @@ if st.button("Generate AI Response", type = "primary"):
         task = "Question:" + question + "Answer: " + answer + "Improve the answer based on the result and highligth the important points."
     backround = "Job Role :" +role + "Difficulty level" +level 
     with st.spinner("Generating your answer..."):
-         try:
-               req = client.chat.completions.create(
-                    model=model,
+        try:
+            req = client.chat.completions.create(model= gen_model,
                      messages=[
                           {"role": "system", "content": "Act as an expert Technical Interviewer."},
                            {"role": "user", "content": background + task}],
             temperature=0.7,
-            max_tokens=1800
-        )
-
-        output = req.choices[0].message.content
-
-        st.subheader("AI Response")
-        st.markdown(output)
-
-        st.download_button("Download Response", output,file_name="Interview_Response.txt", mime="text/plain")
-
-    except Exception as e:
-        st.error(f"API connection was unsuccessful: {e}")
-        st.info("Please check your API key and rate limits.")
-   
-   
-    
-    
-
-st.caption("Powered by Streamlit and GitHub, Using  LLM API")
+            max_tokens=1800)
+            output = req.choices[0].message.content
+            st.subheader("AI Response")
+            st.markdown(output)
+            st.download_button("Download Response", output,file_name="Interview_Response.txt", mime="text/plain")
+        except Exception as e:
+            st.error(f"API connection was unsuccessful: {e}")
+            st.info("Please check your API key and rate limits.")
+   st.caption("Powered by Streamlit and GitHub, Using  LLM API")
 
           
                
