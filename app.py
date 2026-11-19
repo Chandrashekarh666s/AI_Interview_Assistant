@@ -81,11 +81,11 @@ if st.button("Generate AI Response", type = "primary"):
     backround = "Job Role :" +role + "Difficulty level" +level 
     with st.spinner("Generating your answer..."):
          try:
-        req = client.chat.completions.create(
-            model=model,
-            messages=[
-                {"role": "system", "content": "Act as an expert Technical Interviewer."},
-                {"role": "user", "content": background + task}
+               req = client.chat.completions.create(
+                    model=model,
+                     messages=[
+                          {"role": "system", "content": "Act as an expert Technical Interviewer."},
+                           {"role": "user", "content": background + task}
             ],
             temperature=0.7,
             max_tokens=1800
@@ -112,3 +112,7 @@ if st.button("Generate AI Response", type = "primary"):
     
 
 st.caption("Powered by Streamlit and GitHub, Using  LLM API")
+
+          
+               
+              
