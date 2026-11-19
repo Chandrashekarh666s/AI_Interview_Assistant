@@ -64,7 +64,7 @@ else:
     question = st.text_area("Enter Interview Question Here")
     answer = st.text_area("Enter Your Answer", height=160)
 
-if st.button("Generate AI Response", type = "primary") :
+if st.button("Generate AI Response", type = "primary"):
     if mode ==["Evaluate Answer", "Improve Answer"] and (not question.strip()) or (not answer.strip()):
         st.warning ("please enter a valid Question and Answer")
         st.stop()
@@ -91,12 +91,13 @@ if st.button("Generate AI Response", type = "primary") :
 
     ],
     temperature = 0.7 ,
-    max_tokens = 1800
+    max_tokens = 1800 
+            )
     output = req.choices[0].message.content
     st.subheader("AI Response" )
     st.markdown(output)
-    st.download_button("Download Response", output , file_name = "Interview_Response.txt", mine ="text/plain")
-    )
+    st.download_button("Download Response", output , file_name = "Interview_Response.txt", mime ="text/plain")
+    
         except Exception as e:
             st.error ("API connection was Unsuccessfull:", e)
             st.info("please check your API key and rate limits :")
