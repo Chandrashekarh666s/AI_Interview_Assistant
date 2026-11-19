@@ -59,7 +59,7 @@ if st.button("Generate AI Response", type = "primary"):
         task = "Question:"+ question + "Answer: "+answer+"Evaluate the answer based on the question and identify the drawbacks ."
     elif mode == "Improve Answer" :
         task = "Question:" + question + "Answer: " + answer + "Improve the answer based on the result and highligth the important points."
-    backround = "Job Role :" +role + "Difficulty level" +level 
+    background = "Job Role :" +role + "Difficulty level" +level 
     with st.spinner("Generating your answer..."):
         try:
             req = client.chat.completions.create(model= gen_model,
